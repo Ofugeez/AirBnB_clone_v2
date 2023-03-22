@@ -1,8 +1,9 @@
 #!/usr/bin/python3
+""" Function that compress a folder """
 # -*- coding: utf-8 -*-
 """
-Created on Mon Aug 13 14:21:54 2020
-@author: Robinson Montes
+Created on Wed March 22 12:26:54 2023
+@author: Winston Ofugara
 """
 from fabric.api import local, env
 from datetime import datetime
