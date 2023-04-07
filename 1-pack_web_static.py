@@ -1,27 +1,23 @@
 #!/usr/bin/python3
-""" Function that compress a folder """
-# -*- coding: utf-8 -*-
 """
-Created on Wed March 22 12:26:54 2023
-@author: Winston Ofugara
+Fabric script to genereate tgz archive
+execute: fab -f 1-pack_web_static.py do_pack
 """
-from fabric.api import local, env
-from datetime import datetime
 
-env.user = 'ubuntu'
-env.hosts = ['35.227.35.75', '100.24.37.33']
+from datetime import datetime
+from fabric.api import *
 
 
 def do_pack():
     """
-    Targging project directory into a packages as .tgz
+    making an archive on web_static folder
     """
-    now = datetime.now().strftime("%Y%m%d%H%M%S")
-    local('sudo mkdir -p ./versions')
-    path = './versions/web_static_{}'.format(now)
-    local('sudo tar -czvf {}.tgz web_static'.format(path))
-    name = '{}.tgz'.format(path)
-    if name:
-        return name
+
+    time = datetime.now()
+    archive = 'web_static_' + time.strftime("%Y%m%d%H%M%S") + '.' + 'tgz'
+    local('mkdir -p versions')
+    create = local('tar -cvzf versions/{} web_static'.format(archive))
+    if create is not None:
+        return archive
     else:
         return None
